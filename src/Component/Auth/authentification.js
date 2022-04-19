@@ -1,5 +1,5 @@
 import firebase from '../config/fbConfig'
-// import { getAuth, updateProfile } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore"; 
 // import React, {useState} from "react";
 import { getFirestore } from 'firebase/firestore'
@@ -12,13 +12,55 @@ export const LogInWithGoogle = () => {
     var provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(provider)
         .then(function () {
-            window.location = "index.html";
+            UpdateProfileforGoogle()
+            // window.location = "index.html";
         })
         .catch(function (error) {
             // Handle Errors here.
             var errorMessage = error.message;
             create_alert("error", errorMessage);
         });
+}
+const UpdateProfileforGoogle = async () => {
+
+    const auth = getAuth()
+    const user = auth.currentUser;
+
+    if (user) {
+        var email = user.email
+        var Name = ""
+        var Username = ""
+
+        if (email.indexOf('@') !== -1) {
+            Name = email.split('@')[0];
+            Username = Name[0]+Name[1]
+            Username = Username.toUpperCase()
+            }
+            
+    } else {
+        create_alert("No current User")
+    }
+
+
+    firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+            const db = getFirestore();
+             setDoc(doc(db, "Users", user.uid),
+              { 
+                  
+                Name,
+                Username
+
+              }).then(function () {
+                create_alert("Success", "Your Profile is updated!");
+              }).catch(function (error) {
+                var errorMessage = error.message;
+                create_alert("An error has occured", errorMessage);
+              });
+        } else {
+            create_alert("User is not registered !");
+        }
+      });
 }
 
 
@@ -68,16 +110,18 @@ export const signUp = async (newUser) => {
 
 const UpdateProfile = async (newUser) => {
     // console.log(firebase)
-    var firstName = newUser.Firstname
-    var lastname = newUser.Lastname
+    
+    var Name =  newUser.Firstname + ' ' + newUser.Lastname.toUpperCase();
+    var Username = newUser.Firstname[0] + newUser.Lastname[0];
 
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {
             const db = getFirestore();
              setDoc(doc(db, "Users", user.uid),
               { 
-                  Firstname: firstName,
-                  Lastname: lastname
+
+                  Name,
+                  Username
 
               }).then(function () {
                 create_alert("Success", "Your Profile is updated!");
