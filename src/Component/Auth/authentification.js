@@ -21,6 +21,7 @@ export const LogInWithGoogle = () => {
             create_alert("error", errorMessage);
         });
 }
+
 const UpdateProfileforGoogle = async () => {
 
     const auth = getAuth()
@@ -71,7 +72,7 @@ export const LogIn = (Credentials) => {
 
     firebase.auth().signInWithEmailAndPassword(email, password)
         .then(function () {
-            console.log("Congratulation", "You are logged in")
+            // console.log("Congratulation", "You are logged in")
         })
         .catch(function (error) {
             // Handle Errors here.
@@ -133,6 +134,20 @@ const UpdateProfile = async (newUser) => {
             create_alert("User is not registered !");
         }
       });
+}
+
+
+export const signOut = () => {
+
+    firebase.auth().signOut()
+    .then(function () {
+        create_alert("You have succesfully sign out");
+    })
+    .catch(function (error) {
+        // Handle Errors here.
+        var errorMessage = error.message;
+        create_alert("error", errorMessage);
+    });
 }
 
 

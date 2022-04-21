@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import "/Users/sergerigaudjoseph/Desktop/SUCCESS ITNOJ/SCHOOL/SS GEC/Midterm Chatroom Project/chatroom/src/Style/LogInUp.css"
+import "/Users/sergerigaudjoseph/Desktop/SUCCESS ITNOJ/SCHOOL/SS GEC/Midterm Chatroom Project/Chatroom/src/Component/Style/LogInUp.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { LogIn } from '../Auth/authentification'
 import { LogInWithGoogle } from '../Auth/authentification'
+import firebase from '../config/fbConfig'
+
 
 
 function SignIn(props) {
@@ -16,10 +18,22 @@ function SignIn(props) {
         props.setLogstat(false)
       }
 
+      const UserLog = e => {
+        props.setuserisLoggedIn(true)
+      }
+
       const UserLogIn = (event) => {
         event.preventDefault()
-        LogIn(Credentials)
-
+          LogIn(Credentials)
+          var user = firebase.auth().currentUser;
+          if (user) { 
+            //  console.log("User is signed in.")
+            UserLog()
+            // User is signed in.
+          } else {
+            // console.log("No user is signed in.")
+            // No user is signed in.
+          }
       }
 
       const GoogLogIn = (event) => {

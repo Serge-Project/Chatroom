@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "/Users/sergerigaudjoseph/Desktop/SUCCESS ITNOJ/SCHOOL/SS GEC/Midterm Chatroom Project/chatroom/src/Style/LogInUp.css"
+import '/Users/sergerigaudjoseph/Desktop/SUCCESS ITNOJ/SCHOOL/SS GEC/Midterm Chatroom Project/Chatroom/src/Component/Style/LogInUp.css'
 import { signUp } from '../Auth/authentification';
 
 // import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
