@@ -4,7 +4,6 @@ import RoomList from "../CreateRooms/RoomList"
 
 
 function SidebarLeft(props) {
-  // console.log("selescted room", props.Selectedrooms)
   return (
    
         <div id="mySidenav" className="sidenav">

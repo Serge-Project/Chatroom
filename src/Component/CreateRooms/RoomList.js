@@ -2,7 +2,6 @@ import * as React from 'react';
 import "../Style/RoomList.css"
 import Inneroomcomp from "./Inneroomcomp"
 
-
 function RoomList(   props  )      {
 
     if((props.Rooms === undefined) || (props.Rooms === null)){

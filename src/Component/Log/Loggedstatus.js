@@ -37,35 +37,14 @@ import SidebarLeft from "../Sidebar /Sidebarfloatleft"
       }
     )
 
-      const handlesetselectedrooms = (id) => {
-
-        // let newstate = State
-
-        // newstate.Selectedrooms = id
+    const handlesetselectedrooms = (id) => {
         const newTodos = {...State};
         newTodos["Selectedrooms"] = id;
         setState(newTodos); 
-
-
-        // setState({...State, Selectedrooms: id})
-
-        console.log(State)
-
-
-
-
-        // setState(newstate)
-        
-
-        console.log("ksjfbvkjsbdvksbdv" + State.Selectedrooms)
-        }
+    }
    
-    
-  
-
-
-
-     firebase.auth().onAuthStateChanged(function(user) {
+  const CheckLogger = () => {
+    firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         setuserisLoggedIn(true)
         // console.log(user.uid)
@@ -76,13 +55,15 @@ import SidebarLeft from "../Sidebar /Sidebarfloatleft"
         // User is not signed in.
       }
     });
+  }
 
+
+    useEffect(() => {
+      CheckLogger()
+    }, [])
     useEffect(() => {
       setTimeout(() => setLoading(false), 3000)
     }, [])
-
-
-
 
       if( !userisLoggedIn) {
           if(Logstat) {
