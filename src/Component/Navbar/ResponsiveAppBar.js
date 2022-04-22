@@ -16,14 +16,9 @@ function ButtonAppBar(props) {
     console.log("we bout to logout")     
   }
 
-  const updateLogstat = () => {
-    props.setuserisLoggedIn(false)
-    
-  }
-
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, position:'relative' }}>
       <AppBar position="static">
         <Toolbar>
           <IconButton

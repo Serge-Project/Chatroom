@@ -1,9 +1,12 @@
-import React, { useState, useEffect, Suspense } from 'react';
+import React, { useState, useEffect } from 'react';
 import SignUp from './SignUp';
 import SignIn from './SignIn'
 import Dash from '../Dashboard/dash'
 import firebase from '../config/fbConfig'
 import CircularColor from '../Loading'
+import SidebarLeft from "../Sidebar /Sidebarfloatleft"
+// import SidebarRight from "../Sidebar /Sidebarfloatlright"
+
 
 
 
@@ -15,12 +18,57 @@ import CircularColor from '../Loading'
   const [userisLoggedIn, setuserisLoggedIn] = useState(false)
   const [loading, setLoading] = useState(true)
 
-  console.log("sdhjcvjsdhcvjshvcjhsdvkshjdbv kshdbvkshdb")
+  const [State, setState] = useState(
+      {
+          rooms: {
+            'jhally': {
+                title: 'TripFriends',
+                author: 'serge@gmail.com',
+                created: Date.now()
+            },
+            'MrJoe': {
+                title: 'Schoolstuff',
+                author: 'serge@gmail.com',
+                created: Date.now()
+            }
+          },
+
+          Selectedrooms: 'jhally',
+      }
+    )
+
+      const handlesetselectedrooms = (id) => {
+
+        // let newstate = State
+
+        // newstate.Selectedrooms = id
+        const newTodos = {...State};
+        newTodos["Selectedrooms"] = id;
+        setState(newTodos); 
+
+
+        // setState({...State, Selectedrooms: id})
+
+        console.log(State)
+
+
+
+
+        // setState(newstate)
+        
+
+        console.log("ksjfbvkjsbdvksbdv" + State.Selectedrooms)
+        }
+   
+    
+  
+
 
 
      firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         setuserisLoggedIn(true)
+        // console.log(user.uid)
         // console.log('okokokok')
         // User is signed in.
       } else {
@@ -30,8 +78,12 @@ import CircularColor from '../Loading'
     });
 
     useEffect(() => {
-      setTimeout(() => setLoading(false), 700)
+      setTimeout(() => setLoading(false), 3000)
     }, [])
+
+
+
+
       if( !userisLoggedIn) {
           if(Logstat) {
                 if(loading){
@@ -50,9 +102,15 @@ import CircularColor from '../Loading'
            )}
 
       }else{
-        // console.log("User is Signed in then render the dashboard")
         return  (
-          < Dash userisLoggedIn={userisLoggedIn} setuserisLoggedIn={setuserisLoggedIn} />
+          <div className="columns vh-100 is-gapless">
+               < Dash  />
+                    <SidebarLeft Rooms={State.rooms} 
+                                  Selectedrooms={State.Selectedrooms} 
+                                  handlesetselectedrooms={handlesetselectedrooms}
+                                  setState={setState}
+                                  /> 
+          </div> 
      )} 
   }
   

@@ -1,0 +1,48 @@
+
+
+.RoomList {
+   padding: 2px;
+   font-size: 25px;
+   margin-top: 10px;
+   margin-bottom: 10px;
+   margin-left: 20px;
+   border:auto;
+   overflow: hidden;
+   transition: 0.6s;
+   border-bottom-style: solid;
+   cursor: pointer;
+
+   /* border-top: 2px; */
+   /* border-top-left-radius: 2px;
+   border-bottom-right-radius: 2px; */
+   /* border-left: none;
+   border-top-color: red;
+   border-bottom-color: red;
+   border-style: solid; */
+}
+
+.RoomList:hover {
+    background-color: blue;
+    transition: width 7s, height 7s, transform 7s, ease-in-out;
+    font-size: 30px;
+   /* border-bottom-style: solid; */
+   border: none;
+  
+
+} 
+
+.active-room  {
+    background-color: blue;
+    margin-left: 20px;
+    overflow: hidden;
+    transition: width 7s, height 7s, transform 7s, ease-in-out;
+    font-size: 30px;
+   /* border-bottom-style: solid;
+    */
+   border: none;
+   cursor: pointer;
+  
+
+
+
+}
